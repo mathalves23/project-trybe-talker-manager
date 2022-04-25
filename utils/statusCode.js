@@ -1,4 +1,4 @@
 module.exports = {
-	HTTP_OK_STATUS: 200,
-	NOT_FOUND: 404,
+  HTTP_OK_STATUS: 200,
+  NOT_FOUND: 404,
 };
