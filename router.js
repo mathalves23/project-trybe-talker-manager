@@ -8,6 +8,6 @@ router.get('/talker', getTalker); // Requisito 1
 
 router.get('/talker/:id', getTalkerById); // Requisito 2
 
-router.post('/login', login); // Requisito 3
+router.post('/login', login); // Requisito 3 e 4
 
 module.exports = router;

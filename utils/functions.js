@@ -4,12 +4,15 @@ const readTalker = (file) => JSON.parse(fs.readFileSync(file, 'utf8')); // Funç
 
 const sendMessage = (message) => ({ message }); // Função que envia uma mensagem de status
 
-const generateToken = () => (
-  Math.random().toString(16).substr(2) + Math.random().toString(16).substr(2)
-);
+const emailValidation = (enteredEmail) => { // Função que faz a validação do e-mail
+  if (!enteredEmail.includes('@') || !enteredEmail.includes('.com')) {
+    return false;
+  }
+  return true;
+};
 
 module.exports = {
   readTalker,
   sendMessage,
-  generateToken,
+  emailValidation,
 };
