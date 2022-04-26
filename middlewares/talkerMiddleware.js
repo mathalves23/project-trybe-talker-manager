@@ -1,6 +1,6 @@
-const { HTTP_OK_STATUS, NOT_FOUND } = require('../utils/statusCode'); // Importa o código 200
+const { HTTP_OK_STATUS, NOT_FOUND } = require('../utils/statusCode'); // Importa o código 200 e 404.
 
-const { readTalker, sendMessage, generateToken } = require('../utils/functions'); // Importa as funçõees do arquivo functions.js
+const { readTalker, sendMessage, generateToken } = require('../utils/functions'); // Importa as funções do arquivo functions.js
 
 const getTalker = (_req, res) => {
   const talkers = readTalker('./talker.json');
