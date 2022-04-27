@@ -1,5 +1,7 @@
 module.exports = {
   HTTP_OK_STATUS: 200,
+  CREATED_STATUS: 201, 
   ERROR_STATUS: 400,
+  UNAUTHORIZED: 401,
   NOT_FOUND: 404,
 };
