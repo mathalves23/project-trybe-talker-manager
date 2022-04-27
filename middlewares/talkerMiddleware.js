@@ -1,12 +1,12 @@
 const fs = require('fs');
-const { readTalker, sendMessage, generateToken } = require('../utils/functions'); // Importa as funções do arquivo functions.js
+const { readTalker, sendMessage, generateToken } = require('../utils/functions'); // Importa as funções do arquivo functions.js.
 const {
   ERROR_STATUS,
   UNAUTHORIZED,
   CREATED_STATUS,
   HTTP_OK_STATUS,
   NOT_FOUND,
-} = require('../utils/statusCode'); // Importa os status
+} = require('../utils/statusCode'); // Importa os status.
 const {
   TOKEN_ERROR,
   NO_TOKEN,
@@ -17,7 +17,7 @@ const {
   AGE_ERROR,
   EMPTY_ERROR,
   RATE_ERROR,
-} = require('../utils/messages'); // Importa as mensagens de erro
+} = require('../utils/messages'); // Importa as mensagens de erro.
 
 const talkerFile = './talker.json';
 const dateValidation = /^(0[1-9]|[1-2]\d|3[0-1])\/(0[1-9]|1[0-2])\/(19[8-9]\d|20[0-2]\d)$/;
