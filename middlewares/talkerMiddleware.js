@@ -6,6 +6,7 @@ const {
   CREATED_STATUS,
   HTTP_OK_STATUS,
   NOT_FOUND,
+  DELETE_STATUS,
 } = require('../utils/statusCode'); // Importa os status.
 const {
   TOKEN_ERROR,
@@ -111,6 +112,19 @@ const validateTalkerById = (request, response) => { // Validação de palestrant
   }
 };
 
+const deleteTalker = (request, response) => { // Deleta palestrante
+  const { id } = request.params;
+  try {
+    const talkers = JSON.parse(fs.readFileSync(talkerFile, 'utf8'));
+    fs.writeFileSync(talkerFile, JSON.stringify([
+      ...talkers.filter((talker) => talker.id !== Number(id)),
+    ]));
+    return response.status(DELETE_STATUS).json();
+  } catch (error) {
+    console.log(error.massage);
+  }
+};
+
 module.exports = {
   getTalker,
   getTalkerById,
@@ -121,4 +135,5 @@ module.exports = {
   validateRate,
   validateTalker,
   validateTalkerById,
+  deleteTalker,
 };  

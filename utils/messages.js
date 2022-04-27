@@ -18,7 +18,7 @@ module.exports = {
   NO_NAME,
   NAME_ERROR,
   NO_AGE,
-  AGE_ERROR,
+  AGE_ERROR, 
   EMPTY_ERROR,
   DATE_ERROR,
   RATE_ERROR,

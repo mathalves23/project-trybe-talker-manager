@@ -8,6 +8,7 @@ const { getTalker,
   validateRate,
   validateTalker,
   validateTalkerById,
+  deleteTalker,
 } = require('./middlewares/talkerMiddleware');
 
 const router = express.Router();
@@ -31,5 +32,7 @@ router.put('/talker/:id', // Requisito 6
   validateTalk,
   validateRate,
   validateTalkerById);
+
+router.delete('/talker/:id', validateToken, deleteTalker); // Requisito 7
 
 module.exports = router;
