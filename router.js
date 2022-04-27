@@ -6,7 +6,9 @@ const { getTalker,
   validateNameAge,
   validateTalk,
   validateRate,
-  validateTalker } = require('./middlewares/talkerMiddleware');
+  validateTalker,
+  validateTalkerById,
+} = require('./middlewares/talkerMiddleware');
 
 const router = express.Router();
 
@@ -22,5 +24,12 @@ router.post('/talker', // Requisito 5
    validateTalk,
    validateRate,
    validateTalker);
+
+router.put('/talker/:id', // Requisito 6
+  validateToken,
+  validateNameAge,
+  validateTalk,
+  validateRate,
+  validateTalkerById);
 
 module.exports = router;

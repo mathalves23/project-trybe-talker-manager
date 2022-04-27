@@ -19,14 +19,17 @@ const {
   RATE_ERROR,
 } = require('../utils/messages'); // Importa as mensagens de erro
 
+const talkerFile = './talker.json';
+const dateValidation = /^(0[1-9]|[1-2]\d|3[0-1])\/(0[1-9]|1[0-2])\/(19[8-9]\d|20[0-2]\d)$/;
+
 const getTalker = (_req, res) => { // Pega o palestrante
-  const talkers = readTalker('./talker.json');
+  const talkers = readTalker(talkerFile);
   return res.status(HTTP_OK_STATUS).json(talkers);
 };
 
 const getTalkerById = (req, res) => { // Palestrante individualizado por ID
   const { id } = req.params;
-  const talkers = readTalker('./talker.json');
+  const talkers = readTalker(talkerFile);
   const talker = talkers.find((tal) => Number(tal.id) === Number(id));
 
   if (!talker) {
@@ -41,8 +44,6 @@ const login = (_req, res) => { // Validação de login
   };
   res.status(HTTP_OK_STATUS).send(tokenMessage);
 };
-
-const dateValidation = /^(0[1-9]|[1-2]\d|3[0-1])\/(0[1-9]|1[0-2])\/(19[8-9]\d|20[0-2]\d)$/;
 
 const validateToken = (req, res, next) => { // Validação de Token
   const { authorization } = req.headers;
@@ -86,12 +87,27 @@ const validateRate = (req, res, next) => { // Validação de Avaliação
 const validateTalker = (req, res) => { // Validação completa de palestrante
   const { body } = req;
   try {
-    const talkers = JSON.parse(fs.readFileSync('./talker.json', 'utf8'));
+    const talkers = JSON.parse(fs.readFileSync(talkerFile, 'utf8'));
     body.id = talkers.length + 1;
-    fs.writeFileSync('./talker.json', JSON.stringify([...talkers, body]));
+    fs.writeFileSync(talkerFile, JSON.stringify([...talkers, body]));
     return res.status(CREATED_STATUS).json(body);
   } catch (error) {
     console.log(error.message);
+  }
+};
+
+const validateTalkerById = (request, response) => { // Validação de palestrante por ID
+  const { id } = request.params;
+  const { body } = request;
+  try {
+    const talkers = JSON.parse(fs.readFileSync(talkerFile, 'utf8'));
+    const newTalker = { id: Number(id), ...body };
+    fs.writeFileSync(talkerFile, JSON.stringify(
+      [...talkers.filter((talker) => talker.id !== Number(id)), newTalker],
+      ));
+    return response.status(HTTP_OK_STATUS).json(newTalker);
+  } catch (error) {
+    console.log(error.massage);
   }
 };
 
@@ -104,4 +120,5 @@ module.exports = {
   validateTalk,
   validateRate,
   validateTalker,
+  validateTalkerById,
 };  
